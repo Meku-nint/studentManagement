@@ -438,7 +438,7 @@ void loginOptions() {
 }
 
 int main() {
-    system("cls"); // Clear the console screen (platform-specific).
+    system("cls"); 
     loginOptions();
     return 0;
 }
