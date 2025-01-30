@@ -1,0 +1,14 @@
+                   
+
+
+
+
+
+     list of students who participated on the project (student management system)
+     		    
+		         NAME			   ID
+				
+                    1,Tola Anbesu               UGR/7995/15
+		    2,Sahladin Assefa           UGR/1616/15
+                    3,Mekunint Werkie           UGR/2270/15
+		    4,Tesfahun Kere             UGR/3338/15

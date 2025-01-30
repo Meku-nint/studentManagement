@@ -1,0 +1,10 @@
+Department: department of computer science
+Acc year : 2021-2022
+Password: 1234
+studentId: UGR/1/24
+2024-semester1 DIVERSITY 4Total(100%) 80.000000 Grade A
+GPA: 4.00
+2024-semester2 DIVERSITY 4Total(100%) 80.000000 Grade B
+2024-semester2 DIVERSITY 4Total(100%) 80.000000 Grade B
+2024-semester2 DIVERSITY 4Total(100%) 80.000000 Grade B
+GPA: 3.00
