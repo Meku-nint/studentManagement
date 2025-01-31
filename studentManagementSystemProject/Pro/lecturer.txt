@@ -1,5 +1,0 @@
-Name: Dr. Solomon Lecturer ID: 3423
-Name: Dr. sala Lecturer ID: 3421
-Name: Dr. solomon Lecturer ID: 1212
-Name: Dr. tesfahun Lecturer ID: 3432
-Name: Dr. yonatan Lecturer ID: 2331

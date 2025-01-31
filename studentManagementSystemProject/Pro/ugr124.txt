@@ -1,6 +1,0 @@
-Department: computer science
-Acc year : 2024-2025
-Password: 1234
-studentId: UGR/1/24
-2024-semester1 botany 4Total(100%) Grade
-2024-semester1 biodiversty 4Total(100%) Grade

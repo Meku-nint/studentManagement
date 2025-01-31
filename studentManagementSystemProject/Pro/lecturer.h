@@ -18,7 +18,7 @@ public:
         system("cls");
         vector<string> lines;
         string line;
-        string loginData = "Name : " + user_name + " Lecturer ID : " + password;
+        string loginData = "Name: " + user_name + " Lecturer ID: " + password;
         ifstream loginLecturer("lecturer.txt");
         while (getline(loginLecturer, line)) {
             lines.push_back(line);

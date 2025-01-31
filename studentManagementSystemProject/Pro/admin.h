@@ -291,7 +291,6 @@ void addLecturer() {
     } while (controller);
 }
 
-
 void addDepartment() {
     int stream;
     string depName;
@@ -481,7 +480,6 @@ void addCourseForDepartment() {
         getline(cin,lecturerID);
         cout<<"Enter academic semester in this form(2024-semester1): ";
         getline(cin,academicSemester);
-        
         // Create course entry
         string courseEntry ="---"+lecturerName+" "+lecturerID+" "+academicSemester+" " + courseName + " " + courseCredit + "Total(100%) Grade";
         lines.insert(lines.begin() + insertPosition, courseEntry);
