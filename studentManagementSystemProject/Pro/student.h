@@ -254,7 +254,7 @@ void calculateGpa() {
         string line,line2;
         cout<<"Enter semester in the format (2024-semester1)";
         getline(cin, year_semester);
-        cout<<"Enter full_name ";
+        cout<<"Enter your id in format of(ugr/2/24 to ugr224)  ";
         getline(cin, full_name);
         cout<<"Enter password : ";
         getline(cin, password);
@@ -265,6 +265,7 @@ void calculateGpa() {
         while(getline(semesterInfo, line2)){
             if(line2==password){
                 founded=true;
+                break;
         }
         }
         if(!founded){
@@ -272,14 +273,16 @@ void calculateGpa() {
             cin.get();
             studentMenu();
         }
+        if(founded){
         while(getline(semesterInfo, line)){
-            size_t position = line.find(year_semester);
+            size_t position = line.find("2024");
                 if (position != string::npos ) {
                     cout<<line<<endl;
                 }
-        }
-        semesterInfo.close();
+        }}
         cin.get();
+        semesterInfo.close();
+
     studentMenu();
     }
 
@@ -306,7 +309,7 @@ void calculateGpa() {
         }
 
         while(getline(allSemesterInfo, line)){
-            size_t position = line.find("semester");
+            size_t position = line.find(year_semester);
                 if (position != string::npos ) {
                     cout<<line<<endl;
                 }

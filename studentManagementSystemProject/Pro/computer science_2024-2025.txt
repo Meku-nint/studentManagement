@@ -1,13 +1,17 @@
-The number of students is: 3
+The number of students is: 4
 Student ID: UGR/1/24
-Full Name: salhadin assefa
+Full Name: sala sala
 Department: computer science
 Gender: male
 Student ID: UGR/2/24
-Full Name: tesfahun kere
+Full Name: aster
 Department: computer science
 Gender: male
 Student ID: UGR/3/24
-Full Name: aster
+Full Name: tola
+Department: computer science
+Gender: male
+Student ID: UGR/4/24
+Full Name: mekunint
 Department: computer science
 Gender: male

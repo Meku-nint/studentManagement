@@ -246,7 +246,7 @@ void addLecturer() {
             c = tolower(c);
         }
         if (answer == "yes") {
-            control = true;
+            control = true;// if the control is true that alow the student is to be write.
         } else {
             control = false;
         }
@@ -261,7 +261,7 @@ void addLecturer() {
             }
             read.close();
             numberOfStudents = students.size() / 4;
-        }
+        }     
         ofstream write(filename, ios::trunc);
         if (!write) {
             cerr << "Error: Unable to open the file for writing.\n";
@@ -382,7 +382,7 @@ void addDepartment() {
         return;
     }
 
-    for (const auto& line : lines) {
+    for (const auto& line : lines) {  // auto  automatic deduction for the type of the variable
         outputFile << line << endl;
     }
     outputFile.close();
@@ -430,7 +430,7 @@ void addCourseForDepartment() {
     inputFile.close();
     bool streamFound = false;
     vector<int> departmentPositions;
-    for (size_t i = 0; i < lines.size(); ++i) {
+    for (size_t i = 0; i < lines.size(); ++i) {  // size_t for unsign integer value.
         if (lines[i] == selectedStream) {
             streamFound = true;
         } 
@@ -512,16 +512,10 @@ void addCourseForDepartment() {
 
 void editStudentInformation() {
     string id, newName, newDepartment, academicYear,gender;
-
     cout << "Enter student ID to update their information: ";
     getline(cin, id);
-    
-    cout << "Enter new name: ";
-    getline(cin, newName);
-    cout << "Enter new department: ";
+    cout << "Enter his/her department: ";
     getline(cin, newDepartment);
-    cout<<"Enter gender (male/female): ";
-    getline(cin,gender);
     cout << "Enter academic year in this form (2024-2025): ";
     getline(cin, academicYear);
 
@@ -548,24 +542,35 @@ void editStudentInformation() {
     bool found = false;
     int count = 0;
     while (getline(updateStudentsInformation, line)) {
-        if(count<0){
-            allowtoWrite = false;
+
+        if(count>=0){
+            allowtoWrite = true;
         }
         if (line.find(formattedId) != string::npos) {
-        cout<<"Do you want to delete this student? (yes/no): ";
+        found = true;  
+        cout<<"Do you want to delete this student? (yes/no to update his information): ";
         string choice;
         cin>>choice;
         cin.ignore();
         if(choice == "yes"){
             allowtoWrite = false;
-            count = -3; 
+            count = -4; 
             cout<<"Successfully deleted student\n";
         }
-       
-       line = "Student ID: " + id + "\n" +"Full Name: " + newName + "\n" +
-       "Department: " + newDepartment+"\n"+"Gender: "+gender ;
-                   found = true;  
-                   count = -3;     
+    else if(choice=="no"){
+    cout << "Enter new name: ";
+    getline(cin, newName);
+      cout<<"Enter gender (male/female): ";
+    getline(cin,gender);
+       line = "Student ID: " + id + "\n" +"Full Name: " + newName + "\n" +"Department: " + newDepartment+"\n"+"Gender: "+gender ;
+       tempFile << line << endl;
+       allowtoWrite=false;
+       count = -4; 
+    }
+    else {
+        return;
+    }
+   
         }
         if(allowtoWrite){
         tempFile << line << endl;
