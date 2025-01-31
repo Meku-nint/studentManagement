@@ -36,7 +36,6 @@ void loginOptions() {
                 admin.adminMenu();
                 break;
             case 4:
-
                 return;
             default:
                 cout << "Invalid choice." << endl;

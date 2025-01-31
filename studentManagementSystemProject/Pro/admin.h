@@ -10,7 +10,7 @@ private:
 public:
     static Admin* head;
     static Admin* tail; 
-    Admin() : next(nullptr), prev(nullptr) {} 
+    Admin() : next(nullptr), prev(nullptr) {}         
     // Prompts the user to enter the admin username and password, allowing up to three attempts before exiting if incorrect. 
     void loginAsAdmin() {
         system("cls");
@@ -79,82 +79,112 @@ public:
         }
     }
 // This function demonstrates the use of linked lists for managing and sorting lecturer data by dynamically adding new lecturers to the list in sorted order. 
-// It also involves file handling and demonstrates the traversal of the list for displaying information, which is a common application of linked lists in DSA.
+// Function to implement Bubble Sort on the linked list
 void addLecturer() {
-    
-     ifstream read("lecturer.txt");
-        string line;
-        int counter=0;
-        while (getline(read, line)) {
-            counter++;
-            Admin* new_lecturer = new Admin; 
-            new_lecturer->name = line;
+    ifstream read("lecturer.txt");
+    string line;
+    while (getline(read, line)) { 
+        Admin* new_lecturer = new Admin; 
+        new_lecturer->name = line;
+        if (head == nullptr) {
+            head = new_lecturer;
+            head->next=nullptr;
+            tail = new_lecturer;
+            head->prev = nullptr;
+            tail->next = nullptr;
+            tail->prev = nullptr;
 
-            if (head == nullptr) {
-                head = new_lecturer;
-                tail = new_lecturer;
-                head->next = nullptr;
-                head->prev = nullptr;
-            } else {
-                new_lecturer->prev = tail;
-                tail->next = new_lecturer; 
-                tail = new_lecturer; 
-                tail->next = nullptr; 
-            }
+        } else {
+            new_lecturer->prev = tail;
+            tail->next = new_lecturer; 
+            tail = new_lecturer; 
+            tail->next = nullptr; 
         }
-        read.close();
-        string new_lecturers,lecturerId;
-        cout<<"Enter your new lecturer name:( Dr. Tewodros) ";
-        getline(cin,new_lecturers);
-        cout<<"Enter lecturer id: ";
-        getline(cin,lecturerId);
-        string new_lecturerValue="Name : "+new_lecturers+" Lecturer ID : "+lecturerId;
-        Admin*current=head;
-        ofstream written("lecturers.txt",ios::app);
-        bool added=false;
-        while(current!=nullptr){
-            if(!added && new_lecturerValue<=current->name){
-                written<<new_lecturerValue<<endl;
-                added=true;
-            }
-            written<<current->name<<endl;
-            current=current->next;
-        }
-        if(!added){
-            written<<new_lecturerValue<<endl;
-        }
-        written.close();
-       Admin* new_lecturer = new Admin;
-       new_lecturer->name = name;
-        remove("lecturer.txt");
-        rename("lecturers.txt", "lecturer.txt");
-        cout << "Lecturer added successfully." << endl;
-        cout<<"click Enter to continue ..."<<endl;
-        cin.get();
-        cout<<RED;
-        cout<<"1,  see the list of the lecturers"<<endl;
-        cout<<"2,  back to main menu"<<endl;
-        cout<<RESET;   
-        cout<<GREEN<<endl;
-        int choice;
-        cin>>choice;
-        cin.ignore();
-        if(choice==1){
-            system("cls");
-
-            cout<<GREEN<<endl;
-            cout<<"List of lecturers"<<endl<<endl;
-            ifstream showlec("lecturer.txt");
-            while(getline(showlec, line)){
-                cout<<line<<endl;
-            }
-            cin.get();
-            cout<<"continue press enter"<<endl;
-             showlec.close();
-        }
-       
     }
-// This function adds students to a department file, ensuring that student records are sorted in ascending order based on their ID before saving. 
+    read.close();
+    string new_lecturers, lecturerId;
+    cout << "Enter your new lecturer name: (E.g Dr. Tewodros) ";
+    getline(cin, new_lecturers);
+    cout << "Enter lecturer id: ";
+    getline(cin, lecturerId);
+    string new_lecturerValue = "Name: " + new_lecturers + " Lecturer ID: " + lecturerId;
+    Admin* new_added = new Admin;
+    new_added->name = new_lecturerValue;
+
+    // Add the new lecturer to the linked list
+    if (tail != nullptr) {
+        tail->next = new_added;
+        new_added->prev = tail;
+        tail = new_added;
+    } else {
+        head = tail = new_added;  // If the list is empty
+    }
+    tail->next = nullptr;
+
+    // Apply Bubble Sort to sort the list by lecturer name
+     if (head == nullptr) return;
+    bool swapped;
+    Admin* current;
+    Admin* lastSorted = nullptr;
+
+    do {
+        swapped = false;
+        current = head;
+
+        // Traverse the list and swap adjacent nodes if they are out of order
+        while (current->next != lastSorted) {
+            if (current->name > current->next->name) {
+                // Swap the data (names) between the nodes
+                string temp = current->name;
+                current->name = current->next->name;
+                current->next->name = temp;
+                swapped = true;
+            }
+            current = current->next;
+        }
+        lastSorted = current;
+
+    } while (swapped);  // Continue until no more swaps are needed
+    ofstream written("lecturer.txt");
+    if (!written) {
+        cout << "Error opening file for writing." << endl;
+        return;
+    }
+  Admin*  writeToFile = head;
+    while (writeToFile != nullptr) {
+        written << writeToFile->name << endl;
+        writeToFile = writeToFile->next;
+    }
+    written.close();
+
+    cout << "Lecturer added in ascending order successfully." << endl;
+    cout << "Press Enter to continue..." << endl;
+    cin.get();
+
+    // Ask the user for the next action
+    int choice;
+    cout << "1. See the list of the lecturers" << endl;
+    cout << "2. Back to the main menu" << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+    cin.ignore();
+
+    if (choice == 1) {
+        system("cls");
+        cout << "List of lecturers:" << endl << endl;
+        Admin* showCurrent = head;
+        while (showCurrent != nullptr) {
+            cout << showCurrent->name << endl;
+            showCurrent = showCurrent->next;
+        }
+        cout << "Press Enter to continue..." << endl;
+        cin.get();
+    }
+    head=nullptr;
+}
+
+
+//this function adds students to a department file, ensuring that student records are sorted in ascending order based on their ID before saving. 
 // It demonstrates the use of vectors for dynamic storage and file handling while ensuring the list remains ordered, which is a practical example of sorting in data structures.
 
  void addStudent() {
@@ -502,7 +532,6 @@ void editStudentInformation() {
     string formattedId = "Student ID: " + id;
     string filename = newDepartment + "_" + academicYear + ".txt";
     string tempFilename = "temp_" + filename;
-
     ifstream updateStudentsInformation(filename);
     if (!updateStudentsInformation) {
         cerr << "Error: Unable to open " << filename << " for reading.\n";
