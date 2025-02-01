@@ -1,5 +1,4 @@
 #include"header.h"
-// the header file contatin all nesseccery librarys for this program. 
 #include"admin.h"
 #include"student.h"
 #include"lecturer.h"
